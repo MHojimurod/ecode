@@ -9,7 +9,7 @@ from telegram.inline.inputmessagecontent import InputMessageContent
 from telegram.inline.inputtextmessagecontent import InputTextMessageContent
 from telegram.update import Update
 import requests
-
+host = "http://143.244.167.19"
 
 
 my_token = "2112456432:AAHf4Wz7LR0rZiqZxReJQrhUUsLitTMw-vk"
@@ -31,9 +31,10 @@ def start_command(update:Update,context:CallbackContext):
     context.user_data['state'] = 'ecode'
 
 def message_handler(update:Update,context:CallbackContext):
+    global host
     msg = update.message.text
     msg = msg.strip().lower().replace(" ", "")
-    res = requests.get(f"http://157.245.221.46/json_ecode/{msg}")
+    res = requests.get(f"{host}/json_ecode/{msg}")
     a = res.json()['data']
     print(a)
     print(msg)
@@ -45,7 +46,7 @@ def message_handler(update:Update,context:CallbackContext):
         update.message.reply_html('<b>Siz qidirgan Ecode topilmadi</b>')
 
     elif msg == "halol":
-        data = requests.get('http://157.245.221.46/json_status/1/')
+        data = requests.get(f'{host}/json_status/1/')
         all = data.json()['data']
         print(all)
         text = ''
@@ -57,7 +58,7 @@ def message_handler(update:Update,context:CallbackContext):
             text = ('<b>afsus hech narsa topilamdi</b>')
         update.message.reply_html(text=text)
     elif msg == "harom":
-        data = requests.get('http://157.245.221.46/json_status/2/')
+        data = requests.get(f'{host}/json_status/2/')
         all = data.json()['data']
         text = ''
         if all != []:
@@ -67,7 +68,7 @@ def message_handler(update:Update,context:CallbackContext):
             text = ('<b>afsus hech narsa topilamdi</b>')
         update.message.reply_html(text=text)
     elif msg == "muboh":
-        data = requests.get('http://157.245.221.46/json_status/3/')
+        data = requests.get(f'{host}/json_status/3/')
         all = data.json()['data']
         text = ''
         if all != []:
@@ -80,9 +81,10 @@ def message_handler(update:Update,context:CallbackContext):
         start_command(update,context)
 
 def inline_handler(update:Update, context:CallbackContext):
+    global host
     query = update.inline_query.query
     query = query.strip().lower()
-    res = requests.get(f"http://157.245.221.46/json_data/")
+    res = requests.get(f"{host}/json_data/")
     results = []
     for i in res.json()['data']:
         if query in i['ecode'].lower() or query in i['name'].lower():
