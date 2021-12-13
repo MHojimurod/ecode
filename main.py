@@ -21,7 +21,7 @@ status = {
 }
 a = []
 def start_command(update:Update,context:CallbackContext):
-    button = [[KeyboardButton('Halol'),KeyboardButton('Harom')],[KeyboardButton('Mushbooh')]]
+    button = [[KeyboardButton('Halol'),KeyboardButton('Harom')],[KeyboardButton('Muboh')]]
     btn = ReplyKeyboardMarkup(button,resize_keyboard=True)
     if update.message.from_user.id not in a:
         a.append(update.message.from_user.id)
