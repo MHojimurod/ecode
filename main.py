@@ -17,7 +17,7 @@ my_token = "2112456432:AAHf4Wz7LR0rZiqZxReJQrhUUsLitTMw-vk"
 status = {
     1:"Halol",
     2:"Harom",
-    3:"Mushbooh"
+    3:"Muboh"
 }
 a = []
 def start_command(update:Update,context:CallbackContext):
